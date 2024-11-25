@@ -2,7 +2,7 @@ package com.totemdb.pgm.entity;
 
 import java.sql.Timestamp;
 
-public class book {
+public class Book {
     private Long id;
     private String title;
     private String author;

@@ -28,4 +28,12 @@ public class ResponseMessage<T> {
     public static <T> ResponseMessage<T> success(T data) {
         return new ResponseMessage<T>(HttpStatus.OK.value(), "success", data);
     }
+
+    public static <T> ResponseMessage<T> success() {
+        return new ResponseMessage<T>(HttpStatus.OK.value(), "success", null);
+    }
+
+    public static <T> ResponseMessage<T> error(String message) {
+        return new ResponseMessage<T>(HttpStatus.OK.value(), message, null);
+    }
 }
