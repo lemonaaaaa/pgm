@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
-public class paper {
+public class Article {
     @Id
     private Long id;
     private String title;
