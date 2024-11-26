@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface AccountMapper {
 
-    @Insert("Insert into wallet(username,password) values(#{username},#{password})")
-    void register(String username, String password);
+    @Insert("Insert into user(username,password,id) values(#{username},#{password},#{id})")
+    void register(String username, String password,String id);
 
-    @Select("select username,password from wallet where username = #{username}")
+    @Select("select username,password from user where username = #{username}")
     User getByUsername(String username);
 }

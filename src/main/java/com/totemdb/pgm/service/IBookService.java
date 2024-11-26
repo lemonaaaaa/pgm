@@ -28,12 +28,12 @@ public interface IBookService {
      * 管理员根据id删除图书
      * @RequestParam id
      */
-    boolean borrowBook(Integer id);
+    boolean borrowBook(Integer bookID, Integer userId);
     /*
     * 借书
     * @RequestParam id
     */
-    boolean returnBook(Integer id);
+    boolean returnBook(Integer bookID, Integer userId);
     /*
      * 还书
      * @RequestParam id

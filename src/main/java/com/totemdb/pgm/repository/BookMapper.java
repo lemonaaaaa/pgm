@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.totemdb.pgm.entity.Book;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -33,6 +34,12 @@ public interface BookMapper {
 
     @Update("update book set count = count - 1 where id = #{id}")
     void countDecrease(Integer id);
+
+    @Insert("insert into record(bookid,userid,karutime,status) values (#{bookID},#{userID},#{borrowDate},1)")
+    void borrowRecord(Integer bookID, Integer userID, LocalDate borrowDate);
+
+    @Update("update record set kaesutime = #{returnDate},status = 0 where bookid = #{bookID} and userid = #{userID}")
+    void returnRecord(Integer bookID, Integer userID, LocalDate returnDate);
 
     List<Book> filterBook(Book book);
 }

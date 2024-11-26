@@ -17,7 +17,7 @@ public class IAccountService implements AccountService {
     }
 
     @Override
-    public void register(String username, String password) {
-        accountMapper.register(username, password);
+    public void register(String username, String password,String id) {
+        accountMapper.register(username, password,id);
     }
 }

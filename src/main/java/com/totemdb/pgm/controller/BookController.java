@@ -6,6 +6,7 @@ import com.totemdb.pgm.entity.ResponseMessage;
 import com.totemdb.pgm.entity.User;
 import com.totemdb.pgm.entity.Book;
 import com.totemdb.pgm.service.BookService;
+import com.totemdb.pgm.utils.ThreadLocalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -47,14 +49,20 @@ public class BookController {
     }
 
     @PostMapping("/borrow")
-    private ResponseMessage<Book> borrowBook(@RequestParam Integer id) {
-        boolean flag = bookService.borrowBook(id);
+    private ResponseMessage<Book> borrowBook(@RequestParam Integer bookID) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer userID = (Integer)map.get("id");
+
+        boolean flag = bookService.borrowBook(bookID,userID);
         return flag?ResponseMessage.success():ResponseMessage.error("图书已经借完");
     }
 
     @PostMapping("/return")
-    private ResponseMessage<Book> returnBook(@RequestParam Integer id) {
-        boolean flag = bookService.returnBook(id);
+    private ResponseMessage<Book> returnBook(@RequestParam Integer bookId) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer userID = (Integer)map.get("id");
+
+        boolean flag = bookService.returnBook(bookId,userID);
         return flag?ResponseMessage.success():ResponseMessage.error("图书不存在");
     }
 

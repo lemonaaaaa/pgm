@@ -8,6 +8,7 @@ import com.totemdb.pgm.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -46,25 +47,31 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public boolean borrowBook(Integer id){
-        Book book = bookMapper.getBookByID(id);
+    public boolean borrowBook(Integer bookID, Integer userId){
+        Book book = bookMapper.getBookByID(bookID);
+        LocalDate currentTime = LocalDate.now();
+
         if(book.getAvailable() == 0){
             return false;
         }else{
-            bookMapper.availableDecrease(id);
-            bookMapper.countIncrease(id);
+            bookMapper.availableDecrease(bookID);
+            bookMapper.countIncrease(bookID);
+            bookMapper.borrowRecord(bookID,userId,currentTime);
             return true;
         }
     }
 
     @Override
-    public boolean returnBook(Integer id){
-        Book book = bookMapper.getBookByID(id);
+    public boolean returnBook(Integer bookID, Integer userId){
+        Book book = bookMapper.getBookByID(bookID);
+        LocalDate currentTime = LocalDate.now();
+
         if(book == null){
             return false;
         }else{
-            bookMapper.availableIncrease(id);
-            bookMapper.countDecrease(id);
+            bookMapper.availableIncrease(bookID);
+            bookMapper.countDecrease(bookID);
+            bookMapper.returnRecord(bookID,userId,currentTime);
             return true;
         }
     }

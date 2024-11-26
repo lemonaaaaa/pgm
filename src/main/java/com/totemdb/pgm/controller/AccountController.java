@@ -25,13 +25,13 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/register")
-    public ResponseMessage<User> register(@RequestParam String username, @RequestParam String password) {
+    public ResponseMessage<User> register(@RequestParam String username, @RequestParam String password,@RequestParam String id) {
         //查询用户判断是否已经存在相同用户名
         User u = accountService.getByUsername(username);
 
         if (u == null) {
             //用户名未被占用，将信息写入数据库
-            accountService.register(username,password);
+            accountService.register(username,password,id);
             return ResponseMessage.success();
         }else{
             return ResponseMessage.error("用户名已存在");
