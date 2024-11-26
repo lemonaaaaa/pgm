@@ -35,7 +35,7 @@ public class ArticleController {
         return ResponseMessage.success(article);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/upload")
     private ResponseMessage<Article> uploadArticle(@Validated @RequestBody Article article) {
         Map<String,Object> map = ThreadLocalUtil.get();
         Integer userID = (Integer)map.get("id");
@@ -56,7 +56,7 @@ public class ArticleController {
         return ResponseMessage.success(list);
     }
 
-    @GetMapping("/download")
+    @PostMapping("/download")
     private ResponseMessage<Article> downloadArticle(@RequestParam Integer id) {
         Article article = articleService.getArticleByID(id);
         articleService.downloadArticle(id);
