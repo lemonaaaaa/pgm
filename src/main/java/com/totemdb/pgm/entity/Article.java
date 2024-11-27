@@ -11,7 +11,7 @@ public class Article {
     private Long id;
     private String title;
     private String author;
-    private String uploader;
+    private Integer uploader;
     private Timestamp uploadtime;
     private Long count;
     private boolean show;
@@ -28,7 +28,7 @@ public class Article {
         this.author = author;
     }
 
-    public void setUploader(String uploader) {
+    public void setUploader(Integer uploader) {
         this.uploader = uploader;
     }
 
@@ -56,7 +56,7 @@ public class Article {
         return author;
     }
 
-    public String getUploader() {
+    public Integer getUploader() {
         return uploader;
     }
 

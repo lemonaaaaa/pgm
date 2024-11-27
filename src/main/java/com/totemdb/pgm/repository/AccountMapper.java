@@ -4,13 +4,14 @@ import com.totemdb.pgm.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import java.sql.Timestamp;
 
 @Mapper
 public interface AccountMapper {
 
-    @Insert("Insert into test(username,password) values(#{username},#{password})")
-    void register(String username, String password);
+    @Insert("Insert into usertest(username,password,regtime) values(#{username},#{password},#{reg_time})")
+    void register(String username, String password, Timestamp reg_time);
 
-    @Select("select username,password from test where username = #{username}")
+    @Select("select username,password,id from usertest where username = #{username}")
     User getByUsername(String username);
 }

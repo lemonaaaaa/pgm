@@ -10,6 +10,7 @@ import com.totemdb.pgm.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -37,8 +38,10 @@ public class ArticleService implements IArticleService{
     }
 
     @Override
-    public void uploadArticle(Article article,Integer userID){
-        articleMapper.uploadArticle(article,userID);
+    public void uploadArticle(Article article){
+        Timestamp uploadtime = new Timestamp(System.currentTimeMillis());
+        article.setUploadtime(uploadtime);
+        articleMapper.uploadArticle(article);
     }
 
     @Override

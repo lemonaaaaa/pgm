@@ -5,6 +5,7 @@ import com.totemdb.pgm.entity.Article;
 import com.totemdb.pgm.entity.Book;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -16,9 +17,9 @@ public interface ArticleMapper {
     @Select("select * from paper where id = #{id}")
     Article getArticleByID(Integer id);
 
-    @Insert("insert into paper(id,title,author,uploader,uploadtime,count,show) " +
-            "values(#{id},#{title},#{author},#{userID},#{uploadtime},0,#{show})")
-    void uploadArticle(Article article,Integer userID);
+    @Insert("insert into paper(title,author,uploader,uploadtime,count,show) " +
+            "values(#{title},#{author},#{uploader},#{uploadtime},0,true)")
+    void uploadArticle(Article article);
 
     @Delete("delete from paper where id = #{id}")
     void deleteArticle(Integer id);

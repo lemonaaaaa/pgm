@@ -5,6 +5,8 @@ import com.totemdb.pgm.repository.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class AccountService implements IAccountService {
 
@@ -18,6 +20,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public void register(String username, String password) {
-        accountMapper.register(username, password);
+        Timestamp reg_time = new Timestamp(System.currentTimeMillis());
+        accountMapper.register(username, password,reg_time);
     }
 }

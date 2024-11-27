@@ -42,6 +42,7 @@ public class AccountController {
     public ResponseMessage<String> login(@RequestParam String username, @RequestParam String password){
         log.info("登录");
         User u = accountService.getByUsername(username);
+        log.debug("用户名检索结果: {}", u); // 记录u的值
 
         if (u == null){
             return ResponseMessage.error("用户名不存在");
@@ -51,6 +52,7 @@ public class AccountController {
             //成功登录
             Map<String,Object> claims = new HashMap<>();
             claims.put("username",username);
+            claims.put("id",u.getId());
             String token = JwtUtil.genToken(claims);
             return ResponseMessage.success(token);
         }

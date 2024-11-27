@@ -18,7 +18,7 @@ public interface IArticleService {
      * 根据id查询图书
      * @RequestParam id
      */
-    void uploadArticle(Article article,Integer userID);
+    void uploadArticle(Article article);
     /*
      * 管理员新增图书
      * @RequestBody book

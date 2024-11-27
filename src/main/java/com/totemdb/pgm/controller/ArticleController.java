@@ -39,8 +39,9 @@ public class ArticleController {
     private ResponseMessage<Article> uploadArticle(@Validated @RequestBody Article article) {
         Map<String,Object> map = ThreadLocalUtil.get();
         Integer userID = (Integer)map.get("id");
+        article.setUploader(userID);
 
-        articleService.uploadArticle(article,userID);
+        articleService.uploadArticle(article);
         return ResponseMessage.success();
     }
 
