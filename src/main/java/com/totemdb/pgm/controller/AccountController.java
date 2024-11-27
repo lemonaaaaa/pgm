@@ -7,10 +7,7 @@ import com.totemdb.pgm.service.IAccountService;
 import com.totemdb.pgm.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,5 +55,16 @@ public class AccountController {
         }
         else
             return ResponseMessage.error("用户名或密码错误");
+    }
+
+    @GetMapping("/tourist")
+    public ResponseMessage<String> tourist(){
+        User u = accountService.getByUsername("tourist");
+
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("username","tourist");
+        claims.put("id",u.getId());
+        String token = JwtUtil.genToken(claims);
+        return ResponseMessage.success(token);
     }
 }
