@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface IArticleService {
-    PageBean getAllArticles(Integer page, Integer pageSize);
+    List<Article> getAllArticles();
 
     Article getArticleByID(Integer id);
 

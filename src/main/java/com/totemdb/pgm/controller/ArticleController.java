@@ -23,10 +23,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping
-    public ResponseMessage<PageBean> getAllArticles(@RequestParam(defaultValue = "1")Integer page,
-                                                 @RequestParam(defaultValue = "10") Integer pageSize)  {
-        PageBean pagebean = articleService.getAllArticles(page,pageSize);
-        return ResponseMessage.success(pagebean);
+    public ResponseMessage<List<Article>> getAllArticles()  {
+        List<Article> list = articleService.getAllArticles();
+        return ResponseMessage.success(list);
     }
 
     @PostMapping

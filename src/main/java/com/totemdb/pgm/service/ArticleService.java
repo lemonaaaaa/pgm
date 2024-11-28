@@ -19,16 +19,9 @@ public class ArticleService implements IArticleService{
     private ArticleMapper articleMapper;
 
     @Override
-    public PageBean getAllArticles(Integer page, Integer pageSize){
-        //1、设置分页参数
-        PageHelper.startPage(page, pageSize);
-
-        //2、执行查询
-        Page<Article> articleList = articleMapper.getAllArticles();
-
-        //3、封装PageBean
-        PageBean pageBean = new PageBean(articleList.getTotal(),articleList.getResult());
-        return pageBean;
+    public List<Article> getAllArticles(){
+        List<Article> articleList = articleMapper.getAllArticles();
+        return articleList;
     }
 
     @Override

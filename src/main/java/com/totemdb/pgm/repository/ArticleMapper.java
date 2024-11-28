@@ -12,7 +12,7 @@ import java.util.List;
 public interface ArticleMapper {
 
     @Select("select * from paper")
-    Page<Article> getAllArticles();
+    List<Article> getAllArticles();
 
     @Select("select * from paper where id = #{id}")
     Article getArticleByID(Integer id);

@@ -36,7 +36,7 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ResponseMessage<String> login(@RequestParam String username, @RequestParam String password){
+    public ResponseMessage<Map<String,Object>> login(@RequestParam String username, @RequestParam String password){
         log.info("登录");
         User u = accountService.getByUsername(username);
         log.debug("用户名检索结果: {}", u); // 记录u的值
@@ -51,7 +51,11 @@ public class AccountController {
             claims.put("username",username);
             claims.put("id",u.getId());
             String token = JwtUtil.genToken(claims);
-            return ResponseMessage.success(token);
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("token", token);
+            responseData.put("username", username);
+            responseData.put("id", u.getId());
+            return ResponseMessage.success(responseData);
         }
         else
             return ResponseMessage.error("用户名或密码错误");
