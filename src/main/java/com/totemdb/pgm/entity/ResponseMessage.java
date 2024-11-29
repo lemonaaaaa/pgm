@@ -33,7 +33,7 @@ public class ResponseMessage<T> {
         return new ResponseMessage<T>(HttpStatus.OK.value(), "success", null);
     }
 
-    public static <T> ResponseMessage<T> error(String message) {
-        return new ResponseMessage<T>(HttpStatus.OK.value(), message, null);
+    public static <T> ResponseMessage<T> error(String msg) {
+        return new ResponseMessage<T>(HttpStatus.OK.value(), msg, null);
     }
 }

@@ -38,7 +38,7 @@ public class ArticleService implements IArticleService{
     }
 
     @Override
-    public void deleteArticle(Integer id){
+    public void deleteArticle(Long id){
         articleMapper.deleteArticle(id);
     }
 
@@ -51,5 +51,10 @@ public class ArticleService implements IArticleService{
     @Override
     public void downloadArticle(Integer id){
         articleMapper.downloadArticle(id);
+    }
+
+    @Override
+    public Article selectArticleExactly(String title, String author){
+        return articleMapper.selectArticleExactly(title,author);
     }
 }

@@ -35,18 +35,29 @@ public class ArticleController {
     }
 
     @PostMapping("/upload")
-    private ResponseMessage<Article> uploadArticle(@Validated @RequestBody Article article) {
-        Map<String,Object> map = ThreadLocalUtil.get();
-        Integer userID = (Integer)map.get("id");
-        article.setUploader(userID);
+    private ResponseMessage<Article> uploadArticle(@RequestParam String title, @RequestParam String author) {
+        Article article = articleService.selectArticleExactly(title, author);
 
-        articleService.uploadArticle(article);
-        return ResponseMessage.success();
+        if (article == null) {
+            Map<String,Object> map = ThreadLocalUtil.get();
+            Integer userID = (Integer)map.get("id");
+            Article articleNew = new Article();
+            article.setTitle(title);
+            article.setAuthor(author);
+            article.setUploader(userID);
+
+            articleService.uploadArticle(articleNew);
+            return ResponseMessage.success();
+        }else {
+            return ResponseMessage.error("论文已存在");
+        }
+
     }
 
     @DeleteMapping("/delete")
-    private ResponseMessage<Article> deleteArticle(@RequestParam Integer id) {
-        articleService.deleteArticle(id);
+    private ResponseMessage<Article> deleteArticle(@RequestBody Article article) {
+
+        articleService.deleteArticle(article.getId());
         return ResponseMessage.success();
     }
 

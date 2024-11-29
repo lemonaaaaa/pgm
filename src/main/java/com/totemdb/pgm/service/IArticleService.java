@@ -14,9 +14,11 @@ public interface IArticleService {
 
     void uploadArticle(Article article);
 
-    void deleteArticle(Integer id);
+    void deleteArticle(Long id);
 
     List<Article> filterArticleByAuthor(String author);
 
     void downloadArticle(Integer id);
+
+    Article selectArticleExactly(String title, String author);
 }

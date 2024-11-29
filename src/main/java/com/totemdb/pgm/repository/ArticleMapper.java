@@ -5,6 +5,7 @@ import com.totemdb.pgm.entity.Article;
 import com.totemdb.pgm.entity.Book;
 import org.apache.ibatis.annotations.*;
 
+import java.lang.reflect.AnnotatedType;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -22,11 +23,14 @@ public interface ArticleMapper {
     void uploadArticle(Article article);
 
     @Delete("delete from paper where id = #{id}")
-    void deleteArticle(Integer id);
+    void deleteArticle(Long id);
 
     @Select("select * from paper where author like CONCAT('%', #{author}, '%')")
     List<Article> filterArticleByAuthor(String author);
 
     @Update("update paper set count = count + 1 where id = #{id}")
     void downloadArticle(Integer id);
+
+    @Select("select * from paper where title = #{title} and author = #{author}")
+    Article selectArticleExactly(String title, String author);
 }
