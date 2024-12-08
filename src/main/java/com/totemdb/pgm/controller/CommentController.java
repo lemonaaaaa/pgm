@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -29,5 +31,11 @@ public class CommentController {
 
         commentService.addComment(userID,id,type,comment);
         return ResponseMessage.success();
+    }
+
+    @PostMapping("/select")
+    private ResponseMessage<List<Comment>> getCommentList(@RequestParam Integer id,@RequestParam String type) {
+        List<Comment> commentList = commentService.getCommentList(id,type);
+        return ResponseMessage.success(commentList);
     }
 }
