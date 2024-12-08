@@ -3,6 +3,7 @@ package com.totemdb.pgm.service;
 import com.totemdb.pgm.entity.Article;
 import com.totemdb.pgm.entity.Book;
 import com.totemdb.pgm.entity.PageBean;
+import com.totemdb.pgm.entity.User;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface IArticleService {
     void downloadArticle(Integer id);
 
     Article selectArticleExactly(String title, String author);
+
+    void updateArticle(String title, String author, Long id);
 }

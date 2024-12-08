@@ -38,6 +38,11 @@ public class ArticleService implements IArticleService{
     }
 
     @Override
+    public void updateArticle(String title, String author, Long id){
+        articleMapper.updateArticle(title, author, id);
+    }
+
+    @Override
     public void deleteArticle(Long id){
         articleMapper.deleteArticle(id);
     }

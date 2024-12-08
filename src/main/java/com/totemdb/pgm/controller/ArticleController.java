@@ -1,9 +1,7 @@
 package com.totemdb.pgm.controller;
 
-import com.totemdb.pgm.entity.Article;
-import com.totemdb.pgm.entity.Book;
-import com.totemdb.pgm.entity.PageBean;
-import com.totemdb.pgm.entity.ResponseMessage;
+import com.totemdb.pgm.entity.*;
+import com.totemdb.pgm.entity.dto.UserDto;
 import com.totemdb.pgm.service.ArticleService;
 import com.totemdb.pgm.service.BookService;
 import com.totemdb.pgm.utils.ThreadLocalUtil;
@@ -52,6 +50,12 @@ public class ArticleController {
             return ResponseMessage.error("论文已存在");
         }
 
+    }
+
+    @PutMapping
+    private ResponseMessage<Article> updateUser(@RequestParam Integer id, @RequestParam String title, @RequestParam String author) {
+        articleService.updateArticle(title, author, id.longValue());
+        return ResponseMessage.success();
     }
 
     @DeleteMapping("/delete")

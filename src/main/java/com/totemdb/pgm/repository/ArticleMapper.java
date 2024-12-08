@@ -33,4 +33,7 @@ public interface ArticleMapper {
 
     @Select("select * from paper where title = #{title} and author = #{author}")
     Article selectArticleExactly(String title, String author);
+
+    @Update("update paper set title = #{title}, author = #{author} where id = #{id}")
+    void updateArticle(String title, String author, Long id);
 }
