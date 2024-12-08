@@ -96,7 +96,7 @@ public class User implements RowMapper<User>{
         user.setEmail(resultSet.getString("email"));
         user.setName(resultSet.getString("name"));
         String regtimeString = resultSet.getString("regtime");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSX");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSX");
         OffsetDateTime regtime = OffsetDateTime.parse(regtimeString, formatter);
         user.setRegtime(regtime);
         return user;

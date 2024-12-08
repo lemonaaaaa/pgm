@@ -30,27 +30,15 @@ public class UserRepository {
         return row.get(0);
     }
 
-    public void update(User userPojo) {
+    public void update(Integer id, String name, String phone, String email) {
         try {
             String sql = "update usertest set "
-                    + "username = coalesce(?, username), "
-                    + "password = coalesce(?, password), "
-                    + "type = coalesce(?, type), "
-                    + "regtime = coalesce(?, regtime), "
                     + "phone = coalesce(?, phone), "
                     + "email = coalesce(?, email), "
                     + "name = coalesce(?, name) "
                     + "where id = ?";
 
-            jdbcTemplate.update(sql,
-                userPojo.getUsername(),
-                userPojo.getPassword(),
-                userPojo.getType(),
-                userPojo.getRegtime(),
-                userPojo.getPhone(),
-                userPojo.getEmail(),
-                userPojo.getName(),
-                userPojo.getId());
+            jdbcTemplate.update(sql, phone, email, name, id);
         } catch (Exception e) {
             throw new DatabaseException("Failed to update user", e);
         }
@@ -67,5 +55,10 @@ public class UserRepository {
         String sqlDelete = "delete from usertest where id=?";
         jdbcTemplate.update(sqlDelete, userId);
         return userToDelete;
+    }
+
+    public void updatePasswd(Integer userId, String password) {
+        String sqlUpdate = "update usertest set password=? where id=?";
+        jdbcTemplate.update(sqlUpdate, password, userId);
     }
 }

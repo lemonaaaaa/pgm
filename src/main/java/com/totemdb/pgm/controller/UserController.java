@@ -27,9 +27,14 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseMessage<User> updateUser(@Validated @RequestBody UserDto user) {
-        User userNew=userService.updateUser(user);
-        return ResponseMessage.success(userNew);
+    public ResponseMessage<User> updateUser(@RequestParam Integer userId,@RequestParam String name, @RequestParam String phone, @RequestParam String email) {
+        userService.updateUser(userId, name, phone, email);
+        return ResponseMessage.success();
+    }
+    @PutMapping("/passwd")
+    public ResponseMessage<User> updatePasswd(@RequestParam Integer userId,@RequestParam String password) {
+        userService.updatePasswd(userId, password);
+        return ResponseMessage.success();
     }
 
     @DeleteMapping("/{userId}")

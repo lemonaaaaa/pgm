@@ -22,7 +22,7 @@ public interface IUserService {
      * @param user
      * @return
      */
-    User updateUser(UserDto user);
+    void updateUser(Integer userId, String name, String phone, String email);
 
     /**
      * 删除用户
@@ -30,4 +30,6 @@ public interface IUserService {
      * @return
      */
     User deleteUser(Integer userId);
+
+    void updatePasswd(Integer userId, String password);
 }

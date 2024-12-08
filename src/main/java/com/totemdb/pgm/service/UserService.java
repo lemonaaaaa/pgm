@@ -35,16 +35,18 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public User updateUser(UserDto user) {
-        User userPojo=new User();
-        BeanUtils.copyProperties(user,userPojo);
-        userRepository.update(userPojo);
-        return userPojo;
+    public void updateUser(Integer id, String name ,String phone, String email) {
+        userRepository.update(id, name, phone, email);
     }
 
     @Override
     public User deleteUser(Integer userId) {
         User ret= userRepository.deleteUserById(userId);
         return ret;
+    }
+
+    @Override
+    public void updatePasswd(Integer userId, String password) {
+        userRepository.updatePasswd(userId, password);
     }
 }
