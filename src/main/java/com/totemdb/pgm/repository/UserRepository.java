@@ -16,13 +16,13 @@ public class UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     public User add(User user) {
-        String sql="insert into \"user\"(username,password,type,regtime,phone,email,name) values(?,?,?,?,?,?,?)";
+        String sql="insert into usertest(username,password,type,regtime,phone,email,name) values(?,?,?,?,?,?,?)";
         int row=jdbcTemplate.update(sql,user.getUsername(),user.getPassword(),user.getType(),user.getRegtime(),user.getPhone(),user.getEmail(),user.getName());
         return user;
     }
 
     public User getUserById(Integer userId) {
-        String sql="select * from \"user\" where id=?";
+        String sql="select * from usertest where id=?";
         List<User> row=jdbcTemplate.query(sql,new User(), userId);
         if (row.isEmpty()) {
             throw new UserNotFoundException("User with ID " + userId + " not found.");
@@ -32,7 +32,7 @@ public class UserRepository {
 
     public void update(User userPojo) {
         try {
-            String sql = "update \"user\" set "
+            String sql = "update usertest set "
                     + "username = coalesce(?, username), "
                     + "password = coalesce(?, password), "
                     + "type = coalesce(?, type), "
@@ -57,14 +57,14 @@ public class UserRepository {
     }
 
     public User deleteUserById(Integer userId) {
-        String sqlSelect = "select * from \"user\" where id=?";
+        String sqlSelect = "select * from usertest where id=?";
         List<User> row = jdbcTemplate.query(sqlSelect, new User(), userId);
         if (row.isEmpty()) {
             throw new UserNotFoundException("User with ID " + userId + " not found.");
         }
         User userToDelete = row.get(0);
 
-        String sqlDelete = "delete from \"user\" where id=?";
+        String sqlDelete = "delete from usertest where id=?";
         jdbcTemplate.update(sqlDelete, userId);
         return userToDelete;
     }
