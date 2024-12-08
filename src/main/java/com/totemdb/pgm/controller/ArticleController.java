@@ -42,9 +42,9 @@ public class ArticleController {
             Map<String,Object> map = ThreadLocalUtil.get();
             Integer userID = (Integer)map.get("id");
             Article articleNew = new Article();
-            article.setTitle(title);
-            article.setAuthor(author);
-            article.setUploader(userID);
+            articleNew.setTitle(title);
+            articleNew.setAuthor(author);
+            articleNew.setUploader(userID);
 
             articleService.uploadArticle(articleNew);
             return ResponseMessage.success();
