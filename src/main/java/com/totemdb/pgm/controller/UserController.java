@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")    //localhost:8080/user
 public class UserController {
@@ -23,6 +25,12 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseMessage<User> getUser(@PathVariable Integer userId) {   //localhost:8080/user/1
         User userNew=userService.getUser(userId);
+        return ResponseMessage.success(userNew);
+    }
+
+    @GetMapping()
+    public ResponseMessage<List<User>> getAllUser() {   //localhost:8080/user/1
+        List<User> userNew=userService.getAllUser();
         return ResponseMessage.success(userNew);
     }
 

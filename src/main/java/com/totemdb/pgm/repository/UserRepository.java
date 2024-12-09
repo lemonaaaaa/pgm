@@ -61,4 +61,10 @@ public class UserRepository {
         String sqlUpdate = "update usertest set password=? where id=?";
         jdbcTemplate.update(sqlUpdate, password, userId);
     }
+
+    public List<User> getAllUser() {
+        String sql="select * from usertest";
+        List<User> row=jdbcTemplate.query(sql,new User());
+        return row;
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.text.html.Option;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,10 @@ public class UserService implements IUserService{
         User userPojo=new User();
         BeanUtils.copyProperties(user,userPojo);
         OffsetDateTime currentTime  = OffsetDateTime.now();
-        userPojo.setRegtime(currentTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSX");
+        String formattedTime = currentTime.format(formatter);
+        OffsetDateTime offsetDateTime = OffsetDateTime.parse(formattedTime, formatter);
+        userPojo.setRegtime(offsetDateTime);
         userRepository.add(userPojo);
         return userPojo;
     }
@@ -37,6 +41,12 @@ public class UserService implements IUserService{
     @Override
     public void updateUser(Integer id, String name ,String phone, String email) {
         userRepository.update(id, name, phone, email);
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        List<User> ret= userRepository.getAllUser();
+        return ret;
     }
 
     @Override

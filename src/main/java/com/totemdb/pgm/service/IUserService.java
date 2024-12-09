@@ -3,6 +3,8 @@ package com.totemdb.pgm.service;
 import com.totemdb.pgm.entity.User;
 import com.totemdb.pgm.entity.dto.UserDto;
 
+import java.util.List;
+
 public interface IUserService {
     /**
      * 插入用户
@@ -32,4 +34,6 @@ public interface IUserService {
     User deleteUser(Integer userId);
 
     void updatePasswd(Integer userId, String password);
+
+    List<User> getAllUser();
 }
