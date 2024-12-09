@@ -16,8 +16,8 @@ public interface BookMapper {
     @Select("select * from book where id = #{id}")
     Book getBookByID(Integer id);
 
-    @Insert("insert into book(id,title,author,publishtime,total,available,count,show,index) " +
-            "values(#{id},#{title},#{author},#{publishtime},#{total},#{available},#{count},#{show},#{index})")
+    @Insert("insert into book(title,author,publishtime,total,available,count,show,index) " +
+            "values(#{title},#{author},#{publishtime},#{total},#{available},0,#{show},#{index})")
     void addBook(Book book);
 
     @Delete("delete from book where id = #{id}")

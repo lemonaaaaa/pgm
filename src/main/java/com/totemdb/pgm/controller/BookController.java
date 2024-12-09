@@ -30,9 +30,9 @@ public class BookController {
         return ResponseMessage.success(pagebean);
     }
 
-    @PostMapping
-    private ResponseMessage<Book> getBookByID(@RequestParam Integer id) {
-        Book book = bookService.getBookByID(id);
+    @PostMapping("/{userId}")
+    private ResponseMessage<Book> getBookByID(@PathVariable Integer userId) {
+        Book book = bookService.getBookByID(userId);
         return ResponseMessage.success(book);
     }
 
@@ -42,9 +42,9 @@ public class BookController {
         return ResponseMessage.success();
     }
 
-    @DeleteMapping("/delete")
-    private ResponseMessage<Book> deleteBook(@RequestParam Integer id) {
-        bookService.deleteBook(id);
+    @DeleteMapping("/delete/{userId}")
+    private ResponseMessage<Book> deleteBook(@PathVariable Integer userId) {
+        bookService.deleteBook(userId);
         return ResponseMessage.success();
     }
 
