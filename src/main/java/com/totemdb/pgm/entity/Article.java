@@ -14,6 +14,8 @@ public class Article {
     private Integer uploader;
     private Timestamp uploadtime;
     private Long count;
+    private String url;
+    private String publisher;
     private boolean show;
 
     public void setId(Long id) {
@@ -70,5 +72,21 @@ public class Article {
 
     public boolean isShow() {
         return show;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

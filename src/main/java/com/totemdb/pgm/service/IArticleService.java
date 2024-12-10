@@ -24,4 +24,8 @@ public interface IArticleService {
     Article selectArticleExactly(String title, String author);
 
     void updateArticle(String title, String author, Long id);
+
+    List<Article> filterArticleByTitle(String title);
+
+    List<Article> filterArticleByPublisher(String publisher);
 }

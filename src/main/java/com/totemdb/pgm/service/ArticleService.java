@@ -62,4 +62,16 @@ public class ArticleService implements IArticleService{
     public Article selectArticleExactly(String title, String author){
         return articleMapper.selectArticleExactly(title,author);
     }
+
+    @Override
+    public List<Article> filterArticleByTitle(String title) {
+        List<Article> list = articleMapper.filterArticleByTitle(title);
+        return list;
+    }
+
+    @Override
+    public List<Article> filterArticleByPublisher(String publisher) {
+        List<Article> list = articleMapper.filterArticleByPublisher(publisher);
+        return list;
+    }
 }

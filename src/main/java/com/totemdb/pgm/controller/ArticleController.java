@@ -33,7 +33,7 @@ public class ArticleController {
     }
 
     @PostMapping("/upload")
-    private ResponseMessage<Article> uploadArticle(@RequestParam String title, @RequestParam String author) {
+    private ResponseMessage<Article> uploadArticle(@RequestParam String title, @RequestParam String author, @RequestParam String publisher, @RequestParam String url) {
         Article article = articleService.selectArticleExactly(title, author);
 
         if (article == null) {
@@ -43,6 +43,8 @@ public class ArticleController {
             articleNew.setTitle(title);
             articleNew.setAuthor(author);
             articleNew.setUploader(userID);
+            articleNew.setPublisher(publisher);
+            articleNew.setUrl(url);
 
             articleService.uploadArticle(articleNew);
             return ResponseMessage.success();
@@ -65,16 +67,26 @@ public class ArticleController {
         return ResponseMessage.success();
     }
 
-    @PostMapping("/filter")
+    @PostMapping("/filter1")
+    private ResponseMessage<List<Article>> filterArticleByTitle(@RequestParam String title){
+        List<Article> list = articleService.filterArticleByTitle(title);
+        return ResponseMessage.success(list);
+    }
+    @PostMapping("/filter2")
     private ResponseMessage<List<Article>> filterArticleByAuthor(@RequestParam String author){
         List<Article> list = articleService.filterArticleByAuthor(author);
+        return ResponseMessage.success(list);
+    }
+
+    @PostMapping("/filter3")
+    private ResponseMessage<List<Article>> filterArticleByPublisher(@RequestParam String publisher){
+        List<Article> list = articleService.filterArticleByPublisher(publisher);
         return ResponseMessage.success(list);
     }
 
     @PostMapping("/download")
     private ResponseMessage<Article> downloadArticle(@RequestParam Integer id) {
         Article article = articleService.getArticleByID(id);
-        articleService.downloadArticle(id);
         return ResponseMessage.success(article);
     }
 }

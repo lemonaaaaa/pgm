@@ -17,6 +17,7 @@ public class UploadController {
 
         String Filename = file.getOriginalFilename();
         String url = AliOssUtil.uploadFile(Filename,file.getInputStream());
+        System.out.println(url);
         return ResponseMessage.success(url);
     }
 }

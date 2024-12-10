@@ -18,8 +18,8 @@ public interface ArticleMapper {
     @Select("select * from paper where id = #{id}")
     Article getArticleByID(Integer id);
 
-    @Insert("insert into paper(title,author,uploader,uploadtime,count,show) " +
-            "values(#{title},#{author},#{uploader},#{uploadtime},0,true)")
+    @Insert("insert into paper(title,author,uploader,uploadtime,count,show,publisher,url) " +
+            "values(#{title},#{author},#{uploader},#{uploadtime},0,true,#{publisher},#{url})")
     void uploadArticle(Article article);
 
     @Delete("delete from paper where id = #{id}")
@@ -36,4 +36,10 @@ public interface ArticleMapper {
 
     @Update("update paper set title = #{title}, author = #{author} where id = #{id}")
     void updateArticle(String title, String author, Long id);
+
+    @Select("select * from paper where title like CONCAT('%', #{title}, '%')")
+    List<Article> filterArticleByTitle(String title);
+
+    @Select("select * from paper where publisher like CONCAT('%', #{publisher}, '%')")
+    List<Article> filterArticleByPublisher(String publisher);
 }
