@@ -36,4 +36,6 @@ public interface IUserService {
     void updatePasswd(Integer userId, String password);
 
     List<User> getAllUser();
+
+    void updateType(Integer userId, Long type);
 }

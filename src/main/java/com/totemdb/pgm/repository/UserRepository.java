@@ -67,4 +67,9 @@ public class UserRepository {
         List<User> row=jdbcTemplate.query(sql,new User());
         return row;
     }
+
+    public void updateType(Integer userId, Long type) {
+        String sqlUpdate = "update usertest set type=? where id=?";
+        jdbcTemplate.update(sqlUpdate, type, userId);
+    }
 }

@@ -50,4 +50,12 @@ public class UserController {
         User userNew=userService.deleteUser(userId);
         return ResponseMessage.success(userNew);
     }
+
+    @PutMapping("/edit")
+    public ResponseMessage<User> updateUserAdmin(@RequestParam Integer userId,@RequestParam String name, @RequestParam String phone, @RequestParam String email, @RequestParam String password, @RequestParam Long type) {
+        userService.updateUser(userId, name, phone, email);
+        userService.updatePasswd(userId, password);
+        userService.updateType(userId, type);
+        return ResponseMessage.success();
+    }
 }

@@ -59,4 +59,9 @@ public class UserService implements IUserService{
     public void updatePasswd(Integer userId, String password) {
         userRepository.updatePasswd(userId, password);
     }
+
+    @Override
+    public void updateType(Integer userId, Long type) {
+        userRepository.updateType(userId, type);
+    }
 }
