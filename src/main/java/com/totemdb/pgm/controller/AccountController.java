@@ -55,6 +55,7 @@ public class AccountController {
             responseData.put("token", token);
             responseData.put("username", username);
             responseData.put("id", u.getId());
+            responseData.put("type", u.getType());
             return ResponseMessage.success(responseData);
         }
         else
