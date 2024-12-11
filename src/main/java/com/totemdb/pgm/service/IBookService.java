@@ -39,4 +39,6 @@ public interface IBookService {
      * @RequestParam id
      */
     List<Book> filterBook(Book book);
+
+    boolean borrowedBook(Integer bookId, Integer userId);
 }

@@ -2,7 +2,9 @@ package com.totemdb.pgm.repository;
 
 import com.github.pagehelper.Page;
 import com.totemdb.pgm.entity.Book;
+import com.totemdb.pgm.entity.Record;
 import org.apache.ibatis.annotations.*;
+import org.springframework.data.relational.core.sql.In;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,4 +44,7 @@ public interface BookMapper {
     void returnRecord(Integer bookID, Integer userID, LocalDate returnDate);
 
     List<Book> filterBook(Book book);
+
+    @Select("select * from record where userid = #{userId} and bookid = #{bookId} order by id DESC limit 1")
+    Record getBookStatus(Integer bookId, Integer userId);
 }

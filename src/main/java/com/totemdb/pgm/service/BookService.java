@@ -4,6 +4,7 @@ import com.totemdb.pgm.entity.PageBean;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.totemdb.pgm.entity.Book;
+import com.totemdb.pgm.entity.Record;
 import com.totemdb.pgm.repository.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,5 +80,14 @@ public class BookService implements IBookService {
     public List<Book> filterBook(Book book){
         List<Book> list = bookMapper.filterBook(book);
         return list;
+    }
+
+    @Override
+    public boolean borrowedBook(Integer bookId, Integer userId) {
+        Record record = bookMapper.getBookStatus(bookId, userId);
+        if(record == null) { return false;}
+        else if(record.getStatus()==1) {return true;}
+        else if(record.getStatus()==0) {return false;}
+        return false;
     }
 }

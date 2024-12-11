@@ -2,6 +2,7 @@ package com.totemdb.pgm.controller;
 
 
 import com.totemdb.pgm.entity.PageBean;
+import com.totemdb.pgm.entity.Record;
 import com.totemdb.pgm.entity.ResponseMessage;
 import com.totemdb.pgm.entity.User;
 import com.totemdb.pgm.entity.Book;
@@ -70,5 +71,13 @@ public class BookController {
     private ResponseMessage<List<Book>> filterBook(@Validated @RequestBody Book book){
         List<Book> list = bookService.filterBook(book);
         return ResponseMessage.success(list);
+    }
+
+    @PostMapping("/borrowed")
+    private ResponseMessage<Integer> borrowedBook(@RequestParam Integer bookId, @RequestParam Integer userId) {
+        boolean flag = bookService.borrowedBook(bookId, userId);
+        Integer ret = flag?1:0;
+//        Integer ret=1;
+        return ResponseMessage.success(ret);
     }
 }
