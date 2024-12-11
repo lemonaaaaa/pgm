@@ -41,4 +41,6 @@ public interface IBookService {
     List<Book> filterBook(Book book);
 
     boolean borrowedBook(Integer bookId, Integer userId);
+
+    Integer bookTotal();
 }

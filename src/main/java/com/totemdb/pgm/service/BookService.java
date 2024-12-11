@@ -90,4 +90,10 @@ public class BookService implements IBookService {
         else if(record.getStatus()==0) {return false;}
         return false;
     }
+
+    @Override
+    public Integer bookTotal() {
+        Integer ret = bookMapper.getBookTotal();
+        return ret;
+    }
 }

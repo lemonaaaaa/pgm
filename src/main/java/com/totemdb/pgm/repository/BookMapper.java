@@ -47,4 +47,7 @@ public interface BookMapper {
 
     @Select("select * from record where userid = #{userId} and bookid = #{bookId} order by id DESC limit 1")
     Record getBookStatus(Integer bookId, Integer userId);
+
+    @Select("select count(*) from book")
+    Integer getBookTotal();
 }

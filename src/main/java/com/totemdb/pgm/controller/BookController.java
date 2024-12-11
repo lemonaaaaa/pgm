@@ -25,10 +25,16 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    public ResponseMessage<PageBean> getAllBooks(@RequestParam(defaultValue = "1")Integer page,
+        public ResponseMessage<PageBean> getAllBooks(@RequestParam(defaultValue = "1")Integer page,
                                              @RequestParam(defaultValue = "10") Integer pageSize)  {
         PageBean pagebean = bookService.getAllBooks(page,pageSize);
         return ResponseMessage.success(pagebean);
+    }
+
+    @GetMapping("/total")
+    private ResponseMessage<Integer> bookTotal() {
+        Integer ret = bookService.bookTotal();
+        return ResponseMessage.success(ret);
     }
 
     @PostMapping("/{userId}")
