@@ -70,7 +70,6 @@ public class BookService implements IBookService {
             return false;
         }else{
             bookMapper.availableIncrease(bookID);
-            bookMapper.countDecrease(bookID);
             bookMapper.returnRecord(bookID,userId,currentTime);
             return true;
         }
