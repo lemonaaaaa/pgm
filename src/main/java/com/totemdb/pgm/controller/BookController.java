@@ -37,9 +37,9 @@ public class BookController {
         return ResponseMessage.success(ret);
     }
 
-    @PostMapping("/{userId}")
-    private ResponseMessage<Book> getBookByID(@PathVariable Integer userId) {
-        Book book = bookService.getBookByID(userId);
+    @PostMapping("/{bookId}")
+    private ResponseMessage<Book> getBookByID(@PathVariable Integer bookId) {
+        Book book = bookService.getBookByID(bookId);
         return ResponseMessage.success(book);
     }
 
@@ -84,6 +84,19 @@ public class BookController {
         boolean flag = bookService.borrowedBook(bookId, userId);
         Integer ret = flag?1:0;
 //        Integer ret=1;
+        return ResponseMessage.success(ret);
+    }
+
+    @GetMapping("/record")
+    public ResponseMessage<PageBean> getAllRecords(@RequestParam(defaultValue = "1")Integer page,
+                                                 @RequestParam(defaultValue = "10") Integer pageSize)  {
+        PageBean pagebean = bookService.getAllRecords(page,pageSize);
+        return ResponseMessage.success(pagebean);
+    }
+
+    @GetMapping("/rtotal")
+    private ResponseMessage<Integer> recordTotal() {
+        Integer ret = bookService.recordTotal();
         return ResponseMessage.success(ret);
     }
 }

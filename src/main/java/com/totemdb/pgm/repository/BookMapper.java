@@ -50,4 +50,10 @@ public interface BookMapper {
 
     @Select("select count(*) from book")
     Integer getBookTotal();
+
+    @Select("select * from record")
+    Page<Record> getAllRecords();
+
+    @Select("select count(*) from record")
+    Integer getRecordTotal();
 }

@@ -43,4 +43,8 @@ public interface IBookService {
     boolean borrowedBook(Integer bookId, Integer userId);
 
     Integer bookTotal();
+
+    PageBean getAllRecords(Integer page, Integer pageSize);
+
+    Integer recordTotal();
 }
