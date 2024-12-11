@@ -131,7 +131,9 @@ CREATE TABLE public.paper (
     count integer NOT NULL,
     show boolean NOT NULL,
     id integer NOT NULL,
-    author text
+    author text,
+    url text,
+    publisher text
 );
 
 
@@ -142,6 +144,20 @@ ALTER TABLE public.paper OWNER TO postgres;
 --
 
 COMMENT ON TABLE public.paper IS '论文表';
+
+
+--
+-- Name: COLUMN paper.url; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.paper.url IS '文件储存路径';
+
+
+--
+-- Name: COLUMN paper.publisher; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN public.paper.publisher IS '会议期刊名称';
 
 
 --
@@ -378,11 +394,12 @@ ALTER TABLE ONLY public.usertest ALTER COLUMN id SET DEFAULT nextval('public.use
 --
 
 COPY public.book (title, publishtime, total, available, count, show, index, author, id) FROM stdin;
-dasd	2024-12-09 19:25:54.711+08	2	1	2	t	sqada	asdad	2
-dasd	2024-12-09 19:25:54.711+08	2	1	2	t	sqada	asdad	3
-aaaaa	\N	4	1	0	f	dsgsdfg	gfdhdfg	6
-aaaaasf	\N	4	1	0	f	dsgsdfgfsfa	gfdhdfg	7
-fsaf	\N	523	13	0	f	gdsg	fsaf	8
+dasd	2024-12-09 19:25:54.711+08	2	2	5	t	sqada	asdad	3
+dasd	2024-12-09 19:25:54.711+08	2	0	8	t	sqada	asdad	2
+test	\N	2	0	0	f	asfa	123	9
+fsaf	\N	523	10	7	f	gdsg	fsaf	8
+aaaaasf	\N	4	3	8	f	dsgsdfgfsfa	gfdhdfg	7
+aaaaa	\N	4	2	10	f	dsgsdfg	gfdhdfg	6
 \.
 
 
@@ -398,9 +415,9 @@ COPY public.log (userid, type, info, "time", id) FROM stdin;
 -- Data for Name: paper; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.paper (title, uploader, uploadtime, count, show, id, author) FROM stdin;
-12	1	2024-12-09 02:15:55.673+08	0	t	2	123
-123	1	2024-12-09 11:12:51.193+08	0	t	3	21312312
+COPY public.paper (title, uploader, uploadtime, count, show, id, author, url, publisher) FROM stdin;
+213213	1	2024-12-10 20:17:03.049+08	3	t	5	21312	https://booktzk.oss-cn-hangzhou.aliyuncs.com/upload_file.txt	321312
+aaaaaa	1	2024-12-10 20:50:25.022+08	1	t	6	aaaa	https://booktzk.oss-cn-hangzhou.aliyuncs.com/test2.txt	icde
 \.
 
 
@@ -409,6 +426,11 @@ COPY public.paper (title, uploader, uploadtime, count, show, id, author) FROM st
 --
 
 COPY public.record (bookid, userid, karutime, kaesutime, status, id) FROM stdin;
+6	2	2024-12-11	2024-12-11	0	41
+8	2	2024-12-11	2024-12-11	0	42
+8	2	2024-12-11	\N	1	43
+7	1	2024-12-11	2024-12-11	0	44
+6	1	2024-12-11	\N	1	45
 \.
 
 
@@ -433,16 +455,14 @@ COPY public."user" (username, password, type, regtime, name, id, phone, email) F
 --
 
 COPY public.usertest (username, password, id, type, regtime, name, phone, email) FROM stdin;
-lemonaaaaaaaaa	12345	6	3	2024-11-28 09:38:02.795+08	\N	\N	\N
-lemodsad	12345	8	3	2024-11-28 09:38:30.754+08	\N	\N	\N
-lemonasdasd	12345	9	3	2024-11-28 09:42:49.493+08	\N	\N	\N
-lemonasdasdsss	12345	10	3	2024-11-28 09:43:04.108+08	\N	\N	\N
 lemonsadas	12345	11	3	2024-11-28 09:43:29.155+08	\N	\N	\N
 lemon	111111	1	1	2024-11-28 04:58:07.931+08	llmmm	123123444	123124@wr.com
-lemona	12345	2	2	2024-11-28 09:33:57.455+08	\N	\N	\N
 lemonaaaaaaa	12345	5	2	2024-11-28 09:37:38.474+08	\N	\N	\N
 lemonaaaaaaaaaa	12345	7	2	2024-11-28 09:38:06.302+08	\N	\N	\N
-aaaa	12312312	20	2	2024-12-09 13:45:55.354+08	dsfsad	123123	123123@qq.com
+aabb	21131213	21	2	2024-12-10 16:13:38.703+08	ff	213	faf@qq.c2
+lemonasdasdsss	12345	10	3	2024-11-28 09:43:04.108+08	1111	1111	1111
+aaaa	123333	20	2	2024-12-09 13:45:55.354+08	asdad	12321321	asas@qq
+lemona	12345	2	2	2024-11-28 09:33:57.455+08			
 \.
 
 
@@ -450,7 +470,7 @@ aaaa	12312312	20	2	2024-12-09 13:45:55.354+08	dsfsad	123123	123123@qq.com
 -- Name: book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.book_id_seq', 8, true);
+SELECT pg_catalog.setval('public.book_id_seq', 9, true);
 
 
 --
@@ -464,14 +484,14 @@ SELECT pg_catalog.setval('public.log_id_seq', 1, false);
 -- Name: paper_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.paper_id_seq', 3, true);
+SELECT pg_catalog.setval('public.paper_id_seq', 6, true);
 
 
 --
 -- Name: record_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.record_id_seq', 1, false);
+SELECT pg_catalog.setval('public.record_id_seq', 45, true);
 
 
 --
@@ -485,7 +505,7 @@ SELECT pg_catalog.setval('public.user_id_seq', 1, false);
 -- Name: usertest_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.usertest_id_seq', 20, true);
+SELECT pg_catalog.setval('public.usertest_id_seq', 21, true);
 
 
 --
