@@ -49,11 +49,11 @@ public class BookController {
     }
 
     @PostMapping("/borrow")
-    private ResponseMessage<Book> borrowBook(@RequestParam Integer bookID) {
+    private ResponseMessage<Book> borrowBook(@RequestParam Integer bookId) {
         Map<String,Object> map = ThreadLocalUtil.get();
-        Integer userID = (Integer)map.get("id");
+        Integer userId = (Integer)map.get("id");
 
-        boolean flag = bookService.borrowBook(bookID,userID);
+        boolean flag = bookService.borrowBook(bookId,userId);
         return flag?ResponseMessage.success():ResponseMessage.error("图书已经借完");
     }
 
