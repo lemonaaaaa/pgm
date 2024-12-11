@@ -94,9 +94,23 @@ public class BookController {
         return ResponseMessage.success(pagebean);
     }
 
+    @GetMapping("/recordu")
+    public ResponseMessage<PageBean> getUserRecords(@RequestParam(defaultValue = "1")Integer page,
+                                                   @RequestParam(defaultValue = "10") Integer pageSize,
+                                                    @RequestParam Integer userId)  {
+        PageBean pagebean = bookService.getUserRecords(page, pageSize, userId);
+        return ResponseMessage.success(pagebean);
+    }
+
     @GetMapping("/rtotal")
     private ResponseMessage<Integer> recordTotal() {
         Integer ret = bookService.recordTotal();
+        return ResponseMessage.success(ret);
+    }
+
+    @GetMapping("/rtotalu")
+    private ResponseMessage<Integer> recordUserTotal(@RequestParam Integer userId) {
+        Integer ret = bookService.recordUserTotal(userId);
         return ResponseMessage.success(ret);
     }
 }

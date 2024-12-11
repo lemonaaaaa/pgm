@@ -45,6 +45,19 @@ public class BookService implements IBookService {
     }
 
     @Override
+    public PageBean getUserRecords(Integer page, Integer pageSize, Integer userId) {
+        //1、设置分页参数
+        PageHelper.startPage(page, pageSize);
+
+        //2、执行查询
+        Page<Record> recordList = bookMapper.getUserRecords(userId);
+
+        //3、封装PageBean
+        PageBean pageBean = new PageBean(recordList.getTotal(),recordList.getResult());
+        return pageBean;
+    }
+
+    @Override
     public Book getBookByID(Integer id){
         Book book = bookMapper.getBookByID(id);
         return book;
@@ -113,6 +126,12 @@ public class BookService implements IBookService {
     @Override
     public Integer recordTotal() {
         Integer ret = bookMapper.getRecordTotal();
+        return ret;
+    }
+
+    @Override
+    public Integer recordUserTotal(Integer userId) {
+        Integer ret = bookMapper.getRecordUserTotal(userId);
         return ret;
     }
 }

@@ -47,4 +47,8 @@ public interface IBookService {
     PageBean getAllRecords(Integer page, Integer pageSize);
 
     Integer recordTotal();
+
+    PageBean getUserRecords(Integer page, Integer pageSize, Integer userId);
+
+    Integer recordUserTotal(Integer userId);
 }

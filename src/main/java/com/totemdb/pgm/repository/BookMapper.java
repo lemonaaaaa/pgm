@@ -56,4 +56,10 @@ public interface BookMapper {
 
     @Select("select count(*) from record")
     Integer getRecordTotal();
+
+    @Select("select * from record where userid = #{userId}")
+    Page<Record> getUserRecords(Integer userId);
+
+    @Select("select count(*) from record where userid = #{userId}")
+    Integer getRecordUserTotal(Integer userId);
 }
